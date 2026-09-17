@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apofruit Italia · Sostenibilità</title>
+  <meta name="description" content="Apofruit Italia, cooperativa agricola ortofrutticola: scopri il nostro impegno per la sostenibilità. Scarica il Report 2024." />
+
+  <!-- Google Fonts: due famiglie tipografiche caricate da CDN esterno.
+       Fraunces è usata per i titoli (serif elegante), Public Sans per i testi. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Public+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+
+    /* =====================================================================
+       1. RESET DI BASE
+       Azzeriamo margini e padding predefiniti del browser, e impostiamo
+       box-sizing: border-box su tutti gli elementi: in questo modo padding
+       e bordi sono inclusi nella larghezza dichiarata, rendendo i calcoli
+       di layout molto più prevedibili.
+    ===================================================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* scroll-behavior: smooth attiva lo scorrimento fluido quando si clicca
+       su un link che punta a un'ancora interna (es. href="#sostenibilita") */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Public Sans', sans-serif;
+      background-color: #F6F2E9;  /* sfondo color carta, richiama la texture del report */
+      color: #243024;             /* testo quasi nero con tono verde */
+      line-height: 1.6;
+    }
+
+    /* Rimuoviamo la sottolineatura predefinita dai link e ereditiamo il colore
+       dal contesto in cui si trovano */
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Rimuoviamo i punti elenco predefiniti dalle liste */
+    ul {
+      list-style: none;
+    }
+
+    /* Le immagini non devono mai uscire dal loro contenitore */
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* =====================================================================
+       2. CONTENITORE CENTRALE
+       .container è una classe riutilizzabile che centra il contenuto
+       orizzontalmente e lo limita a 1100px di larghezza massima,
+       con un margine laterale di 20px su schermi piccoli.
+    ===================================================================== */
+    .container {
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    /* =====================================================================
+       3. TIPOGRAFIA
+       Definiamo stili di base per titoli e testi riutilizzati in più sezioni.
+    ===================================================================== */
+
+    /* I titoli usano il font Fraunces (serif) e il verde scuro aziendale */
+    h1, h2, h3 {
+      font-family: 'Fraunces', serif;
+      color: #2F4A35;
+      line-height: 1.2;
+    }
+
+    h1 { font-size: 2.6rem; }
+    h2 { font-size: 2rem;   margin-bottom: 1rem; }
+    h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+
+    /* .eyebrow è il piccolo testo in maiuscolo rosso sopra ai titoli di sezione */
+    .eyebrow {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #C8372F;
+      margin-bottom: 0.8rem;
+    }
+
+    /* .section-intro è il paragrafo descrittivo sotto al titolo di sezione */
+    .section-intro {
+      max-width: 620px;
+      color: #51604F;
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+    }
+
+    /* =====================================================================
+       4. BOTTONI
+       Definiamo un bottone base .btn e due varianti: .btn-primary (rosso,
+       per l'azione principale) e .btn-ghost (bordato, per l'azione secondaria).
+    ===================================================================== */
+    .btn {
+      display: inline-block;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.85rem 1.6rem;
+      border-radius: 50px;       /* bordi completamente arrotondati = effetto "pillola" */
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .btn-primary {
+      background-color: #C8372F;
+      color: #ffffff;
+    }
+    .btn-primary:hover {
+      background-color: #A52A23; /* sfondo più scuro al passaggio del mouse */
+    }
+
+    .btn-ghost {
+      border: 2px solid #2F4A35;
+      color: #2F4A35;
+    }
+    .btn-ghost:hover {
+      background-color: #2F4A35;
+      color: #ffffff;
+    }
+
+    /* =====================================================================
+       5. BARRA DI NAVIGAZIONE
+       Usiamo flexbox per affiancare logo e menu, con justify-content:
+       space-between per spingerli agli estremi opposti della barra.
+       La navbar è "sticky": rimane fissa in cima alla pagina durante lo
+       scorrimento grazie a "position: sticky; top: 0".
+    ===================================================================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;              /* z-index alto: rimane sopra a tutti gli altri elementi */
+      background-color: #F6F2E9;
+      border-bottom: 1px solid #d9d2c0;
+    }
+
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.9rem;
+      padding-bottom: 0.9rem;
+    }
+
+    /* Logo: icona SVG + nome affiancati con flexbox */
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #2F4A35;
+    }
+
+    /* Menu di navigazione: voci affiancate orizzontalmente */
+    .navbar-nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .navbar-nav a {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #2F4A35;
+    }
+    .navbar-nav a:hover {
+      color: #C8372F;
+    }
+
+    /* Il link "Scarica il Report" nella navbar usa lo stile bottone */
+    .navbar-nav .btn-primary {
+      padding: 0.55rem 1.2rem;
+      font-size: 0.88rem;
+    }
+
+    /* =====================================================================
+       6. HERO (sezione di apertura)
+       Un blocco centrato con sfondo verde scuro e testo bianco.
+       Usiamo padding generoso per dare respiro al contenuto.
+    ===================================================================== */
+    .hero {
+      background-color: #2F4A35;
+      padding-top: 80px;
+      padding-bottom: 90px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      color: #ffffff;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Piccola etichetta sopra al titolo hero: colore foglia chiaro */
+    .hero .eyebrow {
+      color: #a3c99b;
+    }
+
+    .hero-lead {
+      color: #c5d9c0;
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 2rem;
+    }
+
+    /* I due bottoni hero sono affiancati con flexbox e centrati */
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;           /* su schermi piccoli si impilano su due righe */
+    }
+
+    /* Il bottone fantasma nella hero ha bordo e testo bianchi */
+    .hero .btn-ghost {
+      border-color: #ffffff;
+      color: #ffffff;
+    }
+    .hero .btn-ghost:hover {
+      background-color: #ffffff;
+      color: #2F4A35;
+    }
+
+    /* =====================================================================
+       7. SEZIONI GENERICHE
+       .section è una classe riutilizzabile per il padding verticale uniforme
+       tra una sezione e l'altra.
+       .section-alt cambia il colore di sfondo per alternare visivamente
+       sezioni chiare e leggermente più scure.
+    ===================================================================== */
+    .section {
+      padding-top: 70px;
+      padding-bottom: 70px;
+    }
+
+    .section-alt {
+      background-color: #EFE7D6;
+    }
+
+    /* =====================================================================
+       8. SEZIONE "CHI SIAMO"
+       Layout a due colonne con CSS Grid: testo a sinistra, numeri a destra.
+       "grid-template-columns: 1fr 1fr" divide lo spazio in due parti uguali.
+    ===================================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: #51604F;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Griglia 2x2 per i quattro numeri chiave ("60+ anni", "2.300+ soci"...) */
+    .about-numbers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .number-item {
+      border-left: 3px solid #C8372F;
+      padding-left: 14px;
+    }
+
+    .number-item strong {
+      display: block;
+      font-family: 'Fraunces', serif;
+      font-size: 1.6rem;
+      color: #2F4A35;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .number-item span {
+      font-size: 0.9rem;
+      color: #51604F;
+    }
+
+    /* =====================================================================
+       9. CARD ESG (Ambiente, Sociale, Governance)
+       Una griglia a tre colonne per le card principali.
+       Ogni card ha sfondo bianco, ombra e bordo arrotondato.
+    ===================================================================== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+    }
+
+    /* Stile base di ogni card */
+    .card {
+      background-color: #ffffff;
+      border-radius: 16px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 20px rgba(36, 48, 36, 0.10);
+    }
+
+    /* Icona rotonda sopra al titolo della card */
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      background-color: #E1ECDA;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .card p {
+      color: #51604F;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+
+    /* Lista dei KPI dentro la card: puntini rossi come marcatori personalizzati */
+    .card-stats li {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #2F4A35;
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 6px;
+    }
+
+    .card-stats li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #C8372F;
+    }
+
+    /* =====================================================================
+       10. STRISCIA DEI NUMERI ("Numeri che contano")
+       Fascia a sfondo verde scuro con quattro statistiche in evidenza,
+       disposte su una riga con CSS Grid.
+    ===================================================================== */
+    .stats-strip {
+      background-color: #2F4A35;
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+
+    /* Griglia a quattro colonne per i quattro numeri */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 30px;
+      text-align: center;
+    }
+
+    .stat-number {
+      display: block;
+      font-family: 'Fraunces', serif;
+      font-size: 2.6rem;
+      color: #C8372F;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.80);
+    }
+
+    /* =====================================================================
+       11. CERTIFICAZIONI
+       Griglia di "badge": riquadri con il nome della certificazione e una
+       breve descrizione. Sfondo verde chiaro per distinguerli dalle card.
+    ===================================================================== */
+    .badge-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .badge {
+      background-color: #E1ECDA;
+      border-radius: 12px;
+      padding: 20px 18px;
+    }
+
+    /* Codice della certificazione in evidenza (es. "ISO 9001") */
+    .badge-code {
+      display: block;
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #2F4A35;
+      margin-bottom: 6px;
+    }
+
+    .badge p {
+      font-size: 0.86rem;
+      color: #51604F;
+    }
+
+    /* =====================================================================
+       12. SEZIONE TERRITORIO
+       Card più compatte (card-small) per le tre iniziative locali.
+       Usano la stessa griglia a tre colonne delle card ESG.
+    ===================================================================== */
+
+    /* .card-small riduce il padding rispetto alla card standard */
+    .card-small {
+      background-color: #ffffff;
+      border-radius: 16px;
+      padding: 22px 20px;
+      box-shadow: 0 4px 20px rgba(36, 48, 36, 0.10);
+    }
+
+    /* Etichetta "pill" verde sopra al titolo: indica edizione e anno */
+    .card-meta {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #ffffff;
+      background-color: #6F9A63;
+      padding: 3px 10px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+    }
+
+    .card-small h3 {
+      font-size: 1.05rem;
+    }
+
+    .card-small p {
+      font-size: 0.92rem;
+      color: #51604F;
+      margin-top: 8px;
+    }
+
+    /* =====================================================================
+       13. FASCIA DI DOWNLOAD
+       Blocco a sfondo rosso mela con il bottone per scaricare il PDF.
+       Usiamo flexbox per affiancare il testo al bottone, con spazio
+       automatico tra i due blocchi (justify-content: space-between).
+    ===================================================================== */
+    .download-band {
+      background-color: #C8372F;
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+
+    .download-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: wrap;           /* su mobile si impila verticalmente */
+    }
+
+    .download-inner h2 {
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+
+    .download-inner p {
+      color: rgba(255, 255, 255, 0.88);
+      max-width: 460px;
+    }
+
+    /* Bottone di download: sfondo bianco con testo rosso, icona SVG affiancata */
+    .btn-download {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background-color: #ffffff;
+      color: #C8372F;
+      font-weight: 700;
+      padding: 16px 24px;
+      border-radius: 12px;
+      white-space: nowrap;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      transition: background-color 0.2s;
+    }
+    .btn-download:hover {
+      background-color: #F6F2E9;
+    }
+
+    .btn-download small {
+      display: block;
+      font-weight: 400;
+      font-size: 0.75rem;
+      color: #51604F;
+    }
+
+    /* =====================================================================
+       14. FOOTER
+       <footer> è un elemento semantico HTML5 che indica al browser e agli
+       screen reader che il blocco contiene informazioni di chiusura pagina.
+       Flexbox affianca i due blocchi di testo; su mobile si impilano.
+    ===================================================================== */
+    footer {
+      background-color: #20331F;
+      color: rgba(255, 255, 255, 0.70);
+      padding-top: 40px;
+      padding-bottom: 40px;
+      font-size: 0.88rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    footer strong {
+      color: #ffffff;
+    }
+
+    /* Riga finale con nota didattica, separata da un bordo sottile */
+    .footer-note {
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 18px;
+      font-size: 0.80rem;
+      color: rgba(255,255,255,0.50);
+    }
+
+    /* =====================================================================
+       15. MEDIA QUERY — TABLET (sotto i 900px)
+       Su tablet la griglia a 3 colonne delle card diventa a 2 colonne,
+       e quella "chi siamo" (2 colonne) diventa a 1 colonna.
+    ===================================================================== */
+    @media (max-width: 900px) {
+
+      /* Navbar: nascondo le voci di menu intermedie, tengo solo il bottone */
+      .navbar-nav a:not(.btn-primary) {
+        display: none;
+      }
+
+      /* Hero: titolo più piccolo */
+      h1 { font-size: 2rem; }
+
+      /* "Chi siamo": una colonna sola */
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Cards ESG: due colonne invece di tre */
+      .card-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      /* Stats strip: due colonne */
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      /* Certificazioni: due colonne */
+      .badge-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* =====================================================================
+       16. MEDIA QUERY — MOBILE (sotto i 600px)
+       Su smartphone tutto diventa a colonna singola e i font si riducono.
+    ===================================================================== */
+    @media (max-width: 600px) {
+
+      h1 { font-size: 1.7rem; }
+      h2 { font-size: 1.5rem; }
+
+      /* Una sola colonna per cards, stats, badge e numeri "chi siamo" */
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .badge-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-numbers {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      /* Download: testo e bottone impilati al centro */
+      .download-inner {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ================================================================
+       BARRA DI NAVIGAZIONE
+       <header> è un elemento semantico che indica la testata della pagina.
+       Contiene il logo e il menu principale.
+  ================================================================ -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+
+      <!-- Logo: icona SVG inline + nome cooperativa -->
+      <a class="navbar-brand" href="#">
+        <!-- Icona mela disegnata in SVG: nessun file immagine esterno necessario.
+             aria-hidden="true" la nasconde agli screen reader (è decorativa) -->
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+             stroke="#2F4A35" stroke-width="1.7" aria-hidden="true">
+          <path d="M12 8c-3.5 0-6 2.6-6 6.2 0 3.4 2.6 6.3 5 6.3.8 0 1.4-.3 2-.3.6 0 1.2.3 2 .3 2.4 0 5-2.9 5-6.3C20 10.6 17.5 8 14 8c-.7 0-1.3.2-2 .5-.7-.3-1.3-.5-2-.5z"/>
+          <path d="M12 8c0-1.8.9-3 2.4-3.6"/>
+        </svg>
+        <span>Apofruit</span>
+      </a>
+
+      <!-- Menu di navigazione: i link sono ancore interne (#id) che
+           portano direttamente alla sezione corrispondente della pagina -->
+      <nav aria-label="Navigazione principale">
+        <ul class="navbar-nav">
+          <li><a href="#chi-siamo">Chi siamo</a></li>
+          <li><a href="#sostenibilita">Sostenibilità</a></li>
+          <li><a href="#certificazioni">Certificazioni</a></li>
+          <li><a href="#territorio">Territorio</a></li>
+          <li><a href="#download" class="btn btn-primary">Scarica il Report</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- ================================================================
+       CONTENUTO PRINCIPALE
+       <main> indica ai browser e agli screen reader dove inizia il
+       contenuto principale della pagina.
+  ================================================================ -->
+  <main>
+
+    <!-- ========================= HERO ========================= -->
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">Cooperativa agricola · Cesena, Romagna</p>
+        <h1>Coltiviamo la sostenibilità, raccolto dopo raccolto.</h1>
+        <p class="hero-lead">
+          Da oltre 60 anni Apofruit Italia riunisce più di 2.300 soci produttori
+          ortofrutticoli in tutta Italia. Qui raccontiamo il nostro impegno e
+          mettiamo a disposizione il Report di Sostenibilità 2024.
+        </p>
+        <!-- I due bottoni sono affiancati con flexbox (.hero-actions) -->
+        <div class="hero-actions">
+          <a href="#sostenibilita" class="btn btn-primary">Scopri il nostro impegno</a>
+          <a href="#download" class="btn btn-ghost">Scarica il Report 2024</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== CHI SIAMO ====================== -->
+    <section id="chi-siamo" class="section">
+      <div class="container">
+
+        <!-- .about-grid divide la sezione in due colonne: testo + numeri.
+             Su tablet e mobile diventa una sola colonna (vedi media query). -->
+        <div class="about-grid">
+
+          <div class="about-text">
+            <p class="eyebrow">Chi siamo</p>
+            <h2>Una filiera condivisa da migliaia di produttori</h2>
+            <p>
+              Apofruit Italia è una Società Cooperativa Agricola con sede a
+              Cesena (FC), nata per dare una voce comune a migliaia di produttori
+              ortofrutticoli e pataticoli italiani. Attraverso 12 stabilimenti
+              di lavorazione distribuiti tra Emilia-Romagna, Lazio, Basilicata
+              e Sicilia, la Cooperativa segue ogni fase della filiera: dalla
+              raccolta alla trasformazione, fino alla commercializzazione in
+              Italia e all'estero.
+            </p>
+            <p>
+              Il modello cooperativo si basa sul principio del "voto per testa":
+              ogni socio ha un voto indipendentemente dal capitale conferito,
+              garantendo democrazia e trasparenza nella governance.
+            </p>
+          </div>
+
+          <!-- Griglia 2x2 con i quattro numeri chiave dell'azienda.
+               Ogni voce ha un bordo sinistro rosso come elemento grafico. -->
+          <div class="about-numbers">
+            <div class="number-item">
+              <strong>60+</strong>
+              <span>anni di storia cooperativa</span>
+            </div>
+            <div class="number-item">
+              <strong>2.300+</strong>
+              <span>soci produttori in Italia</span>
+            </div>
+            <div class="number-item">
+              <strong>12</strong>
+              <span>stabilimenti di lavorazione</span>
+            </div>
+            <div class="number-item">
+              <strong>4 regioni</strong>
+              <span>più Spagna e Francia</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SOSTENIBILITÀ ==================== -->
+    <section id="sostenibilita" class="section section-alt">
+      <div class="container">
+        <p class="eyebrow">Sostenibilità</p>
+        <h2>Il nostro impegno, in tre dimensioni</h2>
+        <p class="section-intro">
+          Nel 2024 Apofruit ha pubblicato il proprio primo Report di Sostenibilità,
+          redatto ispirandosi agli standard europei ESRS. Un percorso che intreccia
+          tutela ambientale, attenzione alle persone e correttezza nella gestione
+          d'impresa.
+        </p>
+
+        <!-- .card-grid: griglia a tre colonne per le tre aree ESG.
+             Su tablet scende a 2 colonne, su mobile a 1 (vedi media query). -->
+        <div class="card-grid">
+
+          <!-- Card Ambiente: usa <article> perché il contenuto è autonomo
+               e significativo anche letto separatamente dalle altre card. -->
+          <article class="card">
+            <!-- Icona SVG inline: foglia stilizzata, aria-hidden perché decorativa -->
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                   stroke="#2F4A35" stroke-width="1.6" aria-hidden="true">
+                <path d="M5 13c0-5 4-9 9-9h5v5c0 5-4 9-9 9H5v-5z"/>
+                <path d="M5 19c4-6 9-9 14-13"/>
+              </svg>
+            </div>
+            <h3>Ambiente</h3>
+            <p>
+              Il fabbisogno energetico è soddisfatto per il 68% da fonti
+              rinnovabili, grazie agli impianti fotovoltaici su 14 stabilimenti.
+              Le emissioni di Scope 2 risultano pari a zero.
+            </p>
+            <!-- Lista dei KPI con marcatori a punto rosso personalizzati in CSS -->
+            <ul class="card-stats">
+              <li>68% energia da fonti rinnovabili</li>
+              <li>271.790 m³ acqua consumata (17.500 m³ riciclati)</li>
+              <li>100% rifiuti avviati a recupero, zero a smaltimento</li>
+            </ul>
+          </article>
+
+          <!-- Card Sociale: stessa struttura della card Ambiente. -->
+          <article class="card">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                   stroke="#2F4A35" stroke-width="1.6" aria-hidden="true">
+                <circle cx="9" cy="8" r="3"/>
+                <path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/>
+                <circle cx="17" cy="9" r="2.3"/>
+                <path d="M14.5 14.3c2.6.3 4.5 2.4 4.5 5.2"/>
+              </svg>
+            </div>
+            <h3>Sociale</h3>
+            <p>
+              Nel 2024 la Cooperativa ha contato 2.251 dipendenti, tutti
+              coperti dal Contratto Collettivo Nazionale di Lavoro (CCNL)
+              e da un sistema di gestione della salute e sicurezza.
+            </p>
+            <ul class="card-stats">
+              <li>2.251 dipendenti (1.713 donne, 538 uomini)</li>
+              <li>100% coperti dal CCNL</li>
+              <li>8.716 ore di formazione erogate nel 2024</li>
+            </ul>
+          </article>
+
+          <!-- Card Governance: terza dimensione ESG. -->
+          <article class="card">
+            <div class="card-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                   stroke="#2F4A35" stroke-width="1.6" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="10" rx="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <h3>Governance</h3>
+            <p>
+              Un Codice Etico e un Modello di Organizzazione, Gestione e
+              Controllo (MOG 231) guidano la condotta di tutti i membri
+              dell'organizzazione, supportati da un sistema di whistleblowing.
+            </p>
+            <ul class="card-stats">
+              <li>Codice Etico adottato da tutto il Gruppo</li>
+              <li>Modello 231 in vigore dal 2008</li>
+              <li>Zero casi di corruzione accertati nel 2024</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================ STRISCIA DEI NUMERI ================ -->
+    <!-- Fascia a sfondo verde scuro con quattro statistiche chiave.
+         .stats-grid distribuisce i quattro blocchi su una riga con CSS Grid. -->
+    <section class="stats-strip">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat">
+            <span class="stat-number">68%</span>
+            <span class="stat-label">energia da fonti rinnovabili</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">2.251</span>
+            <span class="stat-label">dipendenti coperti da CCNL</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">25%+</span>
+            <span class="stat-label">superfici coltivate in biologico</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">0</span>
+            <span class="stat-label">tonnellate di rifiuti a smaltimento</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== CERTIFICAZIONI =================== -->
+    <section id="certificazioni" class="section">
+      <div class="container">
+        <p class="eyebrow">Qualità e standard</p>
+        <h2>Certificazioni</h2>
+        <p class="section-intro">
+          Gli stabilimenti e i prodotti Apofruit sono certificati secondo
+          gli standard più riconosciuti a livello internazionale.
+        </p>
+
+        <!-- .badge-grid: griglia a tre colonne per i sei badge.
+             Ogni .badge è un <div> semplice (non <article>) perché il suo
+             contenuto non è autonomo ma ha senso solo insieme agli altri. -->
+        <div class="badge-grid">
+          <div class="badge">
+            <span class="badge-code">GLOBALG.A.P.</span>
+            <p>Buone pratiche agricole lungo tutta la filiera produttiva.</p>
+          </div>
+          <div class="badge">
+            <span class="badge-code">BRC &amp; IFS</span>
+            <p>Standard internazionali di sicurezza alimentare.</p>
+          </div>
+          <div class="badge">
+            <span class="badge-code">ISO 9001</span>
+            <p>Sistema di gestione della qualità riconosciuto a livello globale.</p>
+          </div>
+          <div class="badge">
+            <span class="badge-code">LEAF Marque</span>
+            <p>Pratiche agricole sostenibili certificate internazionalmente.</p>
+          </div>
+          <div class="badge">
+            <span class="badge-code">Biologico UE</span>
+            <p>Reg. (UE) 848/2018 sulla produzione biologica certificata.</p>
+          </div>
+          <div class="badge">
+            <span class="badge-code">GRASP</span>
+            <p>Modulo GlobalG.A.P. per le buone pratiche sociali in agricoltura.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TERRITORIO ==================== -->
+    <section id="territorio" class="section section-alt">
+      <div class="container">
+        <p class="eyebrow">Territorio</p>
+        <h2>Vicini alla comunità di Forlì e Cesena</h2>
+        <p class="section-intro">
+          La Cooperativa sostiene da anni iniziative locali legate alla salute,
+          alla solidarietà e alla sensibilizzazione sociale.
+        </p>
+
+        <!-- Griglia a tre colonne: stessa struttura di .card-grid,
+             ma con le card più compatte (.card-small). -->
+        <div class="card-grid">
+
+          <!-- Card WIRun: .card-meta è la "pillola" verde con edizione e anno -->
+          <article class="card-small">
+            <span class="card-meta">10ª edizione · 2024</span>
+            <h3>WIRun Cesena</h3>
+            <p>
+              Sponsor della corsa per la sensibilizzazione contro la violenza
+              di genere: insieme a Solarelli, Apofruit ha distribuito 2.000
+              mele lungo il percorso.
+            </p>
+          </article>
+
+          <!-- Card Diabetes Marathon -->
+          <article class="card-small">
+            <span class="card-meta">11ª edizione · 2024</span>
+            <h3>Diabetes Marathon</h3>
+            <p>
+              Sponsor tecnico dell'evento promosso da Diabete Romagna Onlus,
+              a sostegno dei bambini e degli adolescenti affetti da diabete.
+            </p>
+          </article>
+
+          <!-- Card Maratona Alzheimer -->
+          <article class="card-small">
+            <span class="card-meta">8ª edizione · 2024</span>
+            <h3>Maratona Alzheimer</h3>
+            <p>
+              Sostegno all'iniziativa dell'Associazione Amici di Casa Insieme
+              di Mercato Saraceno, per la raccolta fondi a favore della ricerca.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== DOWNLOAD ==================== -->
+    <!-- Fascia rossa: la sezione di download è la call-to-action principale
+         della pagina ed è evidenziata con il colore rosso mela. -->
+    <section id="download" class="download-band">
+      <div class="container">
+
+        <!-- .download-inner usa flexbox per affiancare testo e bottone.
+             Su schermi piccoli flex-wrap li impila verticalmente. -->
+        <div class="download-inner">
+          <div>
+            <p class="eyebrow" style="color: rgba(255,255,255,0.7);">Documento ufficiale</p>
+            <h2>Scarica il Report di Sostenibilità 2024</h2>
+            <p>
+              Il documento racconta in modo trasparente i risultati, gli obiettivi
+              e la metodologia del primo percorso di rendicontazione ESRS di
+              Apofruit Italia.
+            </p>
+          </div>
+
+          <!-- L'attributo "download" indica al browser di scaricare il file
+               invece di tentare di aprirlo nella stessa scheda.
+               Il percorso è relativo: il PDF deve trovarsi nella stessa
+               cartella dell'index.html. -->
+          <a class="btn-download"
+             href="report-sostenibilita-apofruit-2024.pdf"
+             download>
+            <!-- Icona freccia giù: SVG inline, aria-hidden perché decorativa -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M12 3v12"/>
+              <path d="M7 10l5 5 5-5"/>
+              <path d="M5 19h14"/>
+            </svg>
+            <span>
+              Scarica il PDF
+              <small>Edizione 2024 · formato PDF</small>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================================================================
+       FOOTER
+       <footer> è un elemento semantico HTML5: indica ai motori di
+       ricerca e agli screen reader che questo blocco contiene le
+       informazioni di chiusura della pagina (contatti, note legali).
+  ================================================================ -->
+  <footer>
+    <div class="container">
+      <!-- .footer-inner usa flexbox per affiancare i due blocchi di testo -->
+      <div class="footer-inner">
+        <div>
+          <strong>Apofruit Italia</strong><br/>
+          Società Cooperativa Agricola<br/>
+          Viale della Cooperazione, 400 — 47522 Pievesestina di Cesena (FC)
+        </div>
+        <div>
+          Sito ufficiale: www.apofruit.it<br/>
+          Fonte dati: Report di Sostenibilità 2024
+        </div>
+      </div>
+      <!-- Nota che specifica la natura didattica della pagina -->
+      <p class="footer-note">
+        Pagina realizzata a scopo didattico nell'ambito di un Project Work
+        universitario — CdS Informatica per le Aziende Digitali (L-31),
+        Università Telematica Pegaso. Non è un canale ufficiale di Apofruit Italia.
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
